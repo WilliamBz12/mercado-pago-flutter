@@ -6,14 +6,14 @@ import '../models/customer_model.dart';
 
 import '../models/credentials_model.dart';
 
-class CustomerService {
+class MercadoPagoCustomerService {
   final MercadoPagoCredentials credentials;
   final Dio client = ApiProvider(Dio()).client();
 
-  CustomerService({this.credentials});
+  MercadoPagoCustomerService({this.credentials});
 
   //Ao Criar usuario a função retorna o id
-  Future<String> create({CustomerModel customer}) async {
+  Future<String> create({MercadoPagoCustomerModel customer}) async {
     try {
       final response = await client.post(
         "v1/customers?access_token=${credentials?.accessToken}",
@@ -26,11 +26,11 @@ class CustomerService {
   }
 
   //Buscar usuario pelo ID
-  Future<CustomerModel> fetchById({String id}) async {
+  Future<MercadoPagoCustomerModel> fetchById({String id}) async {
     try {
       final response = await client
           .get("v1/customers/$id?access_token=${credentials?.accessToken}");
-      return CustomerModel.fromJson(response?.data);
+      return MercadoPagoCustomerModel.fromJson(response?.data);
     } on HttpException catch (e) {
       throw Exception(e.message);
     }

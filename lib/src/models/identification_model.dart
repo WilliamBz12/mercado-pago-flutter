@@ -1,11 +1,11 @@
-class IdentificationModel {
+class MercadoPagoIdentificationModel {
   String type; //Tipo de documento
   String number; //Número do documento
   String documentName;
 
-  IdentificationModel({this.type, this.number});
+  MercadoPagoIdentificationModel({this.type, this.number});
 
-  IdentificationModel.fromJson(Map<String, dynamic> json) {
+  MercadoPagoIdentificationModel.fromJson(Map<String, dynamic> json) {
     type = json['type'];
     number = json['number'];
     documentName = json['name'];

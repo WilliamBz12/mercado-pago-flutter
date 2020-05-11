@@ -5,22 +5,22 @@ import 'package:mercado_pago_flutter/src/core/api_provider.dart';
 import 'package:mercado_pago_flutter/src/models/credentials_model.dart';
 import 'package:mercado_pago_flutter/src/models/identification_model.dart';
 
-class IdentificationTypeService {
+class MercadoPagoIdentificationTypeService {
   final MercadoPagoCredentials credentials;
   final Dio client = ApiProvider(Dio()).client();
 
-  IdentificationTypeService({this.credentials});
+  MercadoPagoIdentificationTypeService({this.credentials});
 
-  Future<List<IdentificationModel>> fetchAll() async {
+  Future<List<MercadoPagoIdentificationModel>> fetchAll() async {
     try {
       final response = await client.get(
         "/v1/identification_types?public_key=${credentials?.publicKey}",
       );
 
-      List<IdentificationModel> methods = [];
+      List<MercadoPagoIdentificationModel> methods = [];
       if (response?.data != null) {
         response.data.forEach((item) {
-          return methods.add(IdentificationModel.fromJson(item));
+          return methods.add(MercadoPagoIdentificationModel.fromJson(item));
         });
       }
       return methods;

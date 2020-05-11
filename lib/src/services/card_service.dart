@@ -2,19 +2,21 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:mercado_pago_flutter/src/core/api_provider.dart';
+import '../../src/core/api_provider.dart';
 
 import '../models/credentials_model.dart';
 import '../models/credit_card_model.dart';
 
-class CardService {
+class MercadoPagoCardService {
   MercadoPagoCredentials credentials;
   final Dio client = ApiProvider(Dio()).client();
 
-  CardService({this.credentials});
+  MercadoPagoCardService({this.credentials});
 
   //cadastrar cartão
-  Future<String> register({@required CreditCardModel card}) async {
+  Future<String> register({
+    @required MercadoPagoCreditCardModel card,
+  }) async {
     try {
       final response = await client.post(
         "v1/card_tokens?public_key=${credentials?.publicKey}",
@@ -42,7 +44,7 @@ class CardService {
     }
   }
 
-  Future<List<CreditCardModel>> allFromCustomer({
+  Future<List<MercadoPagoCreditCardModel>> allFromCustomer({
     @required String customerID,
   }) async {
     try {
@@ -50,10 +52,10 @@ class CardService {
         "v1/customers/$customerID/cards?access_token=${credentials?.accessToken}",
       );
       //Handle List
-      List<CreditCardModel> cards = [];
+      List<MercadoPagoCreditCardModel> cards = [];
       if (response?.data != null) {
         response.data.forEach((item) {
-          return cards.add(CreditCardModel.fromJson(item));
+          return cards.add(MercadoPagoCreditCardModel.fromJson(item));
         });
       }
       return cards;
@@ -77,7 +79,7 @@ class CardService {
       );
       //TODO: handle response
       return response?.data.toString();
-    } on  HttpException catch (e) {
+    } on HttpException catch (e) {
       throw Exception(e.message);
     }
   }

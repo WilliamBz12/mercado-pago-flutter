@@ -1,13 +1,13 @@
 import 'identification_model.dart';
 
-class CustomerModel {
+class MercadoPagoCustomerModel {
   String id;
   String email;
   String firstName;
   String lastName;
-  IdentificationModel identification;
+  MercadoPagoIdentificationModel identification;
 
-  CustomerModel({
+  MercadoPagoCustomerModel({
     this.id,
     this.email,
     this.firstName,
@@ -15,13 +15,13 @@ class CustomerModel {
     this.identification,
   });
 
-  CustomerModel.fromJson(Map<String, dynamic> json) {
+  MercadoPagoCustomerModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     email = json['email'];
     firstName = json['first_name'];
     lastName = json['last_name'];
     identification = json['identification'] != null
-        ? new IdentificationModel.fromJson(json['identification'])
+        ? new MercadoPagoIdentificationModel.fromJson(json['identification'])
         : null;
   }
 

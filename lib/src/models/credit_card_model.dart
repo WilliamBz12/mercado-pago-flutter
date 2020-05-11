@@ -1,6 +1,6 @@
 import 'identification_model.dart';
 
-class CreditCardModel {
+class MercadoPagoCreditCardModel {
   String securityCode;
   String expirationYear;
   String expirationMonth;
@@ -8,7 +8,7 @@ class CreditCardModel {
   String lastFourDigits;
   Cardholder cardholder;
 
-  CreditCardModel({
+  MercadoPagoCreditCardModel({
     this.securityCode,
     this.expirationYear,
     this.expirationMonth,
@@ -17,7 +17,7 @@ class CreditCardModel {
     this.lastFourDigits,
   });
 
-  CreditCardModel.fromJson(Map<String, dynamic> json) {
+  MercadoPagoCreditCardModel.fromJson(Map<String, dynamic> json) {
     
     expirationYear = json['expiration_year'];
     lastFourDigits = json['last_four_digits'];
@@ -43,14 +43,14 @@ class CreditCardModel {
 
 class Cardholder {
   String name;
-  IdentificationModel identification;
+  MercadoPagoIdentificationModel identification;
 
   Cardholder({this.name, this.identification});
 
   Cardholder.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     identification = json['identification'] != null
-        ? new IdentificationModel.fromJson(json['identification'])
+        ? new MercadoPagoIdentificationModel.fromJson(json['identification'])
         : null;
   }
 

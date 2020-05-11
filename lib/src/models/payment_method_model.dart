@@ -1,4 +1,4 @@
-class PaymentMethodModel {
+class MercadoPagoPaymentMethodModel {
   String id;
   String name;
   String paymentTypeId;
@@ -8,7 +8,7 @@ class PaymentMethodModel {
   double minAllowedAmount;
   int accreditationTime;
 
-  PaymentMethodModel({
+  MercadoPagoPaymentMethodModel({
     this.id,
     this.name,
     this.paymentTypeId,
@@ -19,7 +19,7 @@ class PaymentMethodModel {
     this.accreditationTime,
   });
 
-  PaymentMethodModel.fromJson(Map<String, dynamic> json) {
+  MercadoPagoPaymentMethodModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     paymentTypeId = json['payment_type_id'];

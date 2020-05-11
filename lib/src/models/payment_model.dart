@@ -1,4 +1,4 @@
-class PaymentModel {
+class MercadoPagoPaymentModel {
   String id;
   String cardToken;
   double transactionAmount;
@@ -9,7 +9,7 @@ class PaymentModel {
   String status; 
   String paymentTypeId;
 
-  PaymentModel({
+  MercadoPagoPaymentModel({
     this.cardToken,
     this.transactionAmount,
     this.description,
@@ -18,7 +18,7 @@ class PaymentModel {
     this.payer,
   });
 
-  PaymentModel.fromJson(Map<String, dynamic> json) {
+  MercadoPagoPaymentModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     cardToken = json['token'];
     status = json['status'];

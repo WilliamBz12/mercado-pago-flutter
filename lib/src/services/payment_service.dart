@@ -6,14 +6,14 @@ import '../models/payment_model.dart';
 
 import '../models/credentials_model.dart';
 
-class PaymentService {
+class MercadoPagoPaymentService {
   MercadoPagoCredentials credentials;
   final Dio client = ApiProvider(Dio()).client();
 
-  PaymentService({this.credentials});
+  MercadoPagoPaymentService({this.credentials});
 
   //efetuar pagamento
-  Future<String> create({PaymentModel payment}) async {
+  Future<String> create({MercadoPagoPaymentModel payment}) async {
     try {
       final response = await client.post(
         "/v1/payments?access_token=${credentials?.accessToken}",
@@ -26,12 +26,12 @@ class PaymentService {
   }
 
   //BuscarPagamentos
-  Future<PaymentModel> fetch({String paymentID}) async {
+  Future<MercadoPagoPaymentModel> fetch({String paymentID}) async {
     try {
       final response = await client.get(
         "/v1/payments/$paymentID?access_token=${credentials?.accessToken}",
       );
-      return PaymentModel.fromJson(response?.data);
+      return MercadoPagoPaymentModel.fromJson(response?.data);
     } on HttpException catch (e) {
       throw Exception(e.message);
     }
