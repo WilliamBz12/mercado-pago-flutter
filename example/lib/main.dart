@@ -19,27 +19,32 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void createAnCustomer() async {
-    final customerService = CustomerService(
-      credentials: MercadoPagoCredentials(
-        publicKey: "TEST-c4dddf49-fb1d-4255-a533-771893450ca1",
-        accessToken: "TEST-5561621576284332-050814-31ec2e6e955becf249b25184d0f12114-172873986",
-      ),
+  
+  final _myCredentials = MercadoPagoCredentials(
+    publicKey: "TEST-c4dddf49-fb1d-4255-a533-771893450ca1",
+    accessToken:
+        "TEST-5561621576284332-050814-31ec2e6e955becf249b25184d0f12114-172873986",
+  );
+
+
+  Future<String> createAnCustomer() async {
+    final customerService = MercadoPagoCustomerService(
+      credentials: _myCredentials,
     );
 
     final customerId = await customerService.create(
-      customer: CustomerModel(
+      customer: MercadoPagoCustomerModel(
         email: "ana@gmail.com",
         firstName: "will",
         lastName: "santos",
-        identification: IdentificationModel(
+        identification: MercadoPagoIdentificationModel(
           number: "10205236030",
           type: "CPF",
         ),
       ),
     );
 
-    print(customerId);
+    return customerId;
   }
 
   @override
