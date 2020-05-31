@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:mercado_pago_flutter/src/core/api_provider.dart';
 import '../models/customer_model.dart';
@@ -20,8 +18,8 @@ class MercadoPagoCustomerService {
         data: customer.toJson(),
       );
       return response?.data["id"];
-    } on HttpException catch (e) {
-      throw Exception(e.message);
+    } on DioError {
+      rethrow;
     }
   }
 
@@ -31,8 +29,8 @@ class MercadoPagoCustomerService {
       final response = await client
           .get("v1/customers/$id?access_token=${credentials?.accessToken}");
       return MercadoPagoCustomerModel.fromJson(response?.data);
-    } on HttpException catch (e) {
-      throw Exception(e.message);
+    } on DioError {
+      rethrow;
     }
   }
 }

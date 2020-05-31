@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import '../../src/core/api_provider.dart';
@@ -23,8 +21,8 @@ class MercadoPagoCardService {
         data: card.toJson(),
       );
       return response?.data["id"];
-    } on HttpException catch (e) {
-      throw Exception(e.message);
+    } on DioError {
+      rethrow;
     }
   }
 
@@ -36,11 +34,14 @@ class MercadoPagoCardService {
     try {
       final response = await client.post(
         "v1/card_tokens?public_key=${credentials?.publicKey}",
-        data: {'token': cardToken},
+        data: {
+          'token': cardToken,
+          'customer': customerID,
+        },
       );
-      return response.data;
-    } on HttpException catch (e) {
-      throw Exception(e.message);
+      return response.data['id'];
+    } on DioError {
+      rethrow;
     }
   }
 
@@ -59,8 +60,8 @@ class MercadoPagoCardService {
         });
       }
       return cards;
-    } on HttpException catch (e) {
-      throw Exception(e.message);
+    } on DioError {
+      rethrow;
     }
   }
 
@@ -79,8 +80,8 @@ class MercadoPagoCardService {
       );
       //TODO: handle response
       return response?.data.toString();
-    } on HttpException catch (e) {
-      throw Exception(e.message);
+    } on DioError {
+      rethrow;
     }
   }
 }

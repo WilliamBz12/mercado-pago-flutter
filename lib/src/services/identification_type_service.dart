@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:mercado_pago_flutter/src/core/api_provider.dart';
 import 'package:mercado_pago_flutter/src/models/credentials_model.dart';
@@ -24,8 +22,8 @@ class MercadoPagoIdentificationTypeService {
         });
       }
       return methods;
-    } on HttpException catch (e) {
-      throw Exception(e.message);
+    } on DioError {
+      rethrow;
     }
   }
 }

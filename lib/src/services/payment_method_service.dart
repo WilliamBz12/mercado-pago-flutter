@@ -24,8 +24,8 @@ class MercadoPagoPaymentMethodService {
         });
       }
       return methods;
-    } on HttpException catch (e) {
-      throw Exception(e.message);
+    } on DioError {
+      rethrow;
     }
   }
 }

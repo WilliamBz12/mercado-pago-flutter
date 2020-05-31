@@ -20,8 +20,8 @@ class MercadoPagoPaymentService {
         data: payment.toJson(),
       );
       return response.data["id"];
-    } on HttpException catch (e) {
-      throw Exception(e.message);
+    } on DioError {
+      rethrow;
     }
   }
 
@@ -32,8 +32,8 @@ class MercadoPagoPaymentService {
         "/v1/payments/$paymentID?access_token=${credentials?.accessToken}",
       );
       return MercadoPagoPaymentModel.fromJson(response?.data);
-    } on HttpException catch (e) {
-      throw Exception(e.message);
+    } on DioError {
+      rethrow;
     }
   }
 }

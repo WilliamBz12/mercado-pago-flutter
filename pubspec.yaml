@@ -8,6 +8,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  awesome_card: ^1.1.0
   dartz: ^0.9.1
   dio: ^3.0.9
   flutter:
